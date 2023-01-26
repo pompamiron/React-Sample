@@ -13,7 +13,7 @@ import {
 const DialogsSection = () => {
   const [modal, setModal] = useState<ReactNode | null>(null);
   const [openEmailDialog, setOpenEmailDialog] = useState(false);
-  const [email, setEmail] = useState('i@karpolan.com');
+  const [email, setEmail] = useState('chalakorn@gmail.com');
 
   const onDialogClose = useCallback(() => {
     setModal(null);
@@ -30,12 +30,9 @@ const DialogsSection = () => {
         open
         hideCancelButton
         confirmButtonText="OK"
-        data="Dialog Data can be object, string, number, boolean, etc. It is passed to onConfirm callback"
+        data="Message..."
         title="Simple Message"
-        text={`Use props.text to pass string message here. 
-			         If you need to render JSX content inside the dialog use props.body. 
-			         Text and color of the "Confirm" button is customizable.
-					     The "Cancel" button can be hidden`}
+        text={`Message....`}
         onClose={onDialogClose}
         onConfirm={onMessageDialogConfirm}
       />
@@ -59,7 +56,6 @@ const DialogsSection = () => {
         title="Do you really want to do something?"
         body={
           <>
-            <div>JSX content can be easily added into the dialog via props.body</div>
             <br />
             <AppIconButton title="Default icon, no color specified" />
             <AppIconButton icon="close" color="primary" title="Close icon with Primary color" />
@@ -79,15 +75,11 @@ const DialogsSection = () => {
               title="VisibilityOn icon with LimeGreen (rgb(50, 205, 50)) color"
             />
             <AppIconButton icon="account" color="inherit" title="Account icon with Inherit color" />
-            {/* <AppIconButton icon="close" color="primary" disabled title="Disabled Close icon with Primary color" /> */}
             <br />
             <br />
-            <div>
-              The props.body takes precedence over props.text. So JSX content is rendered, but the text is ignored
-            </div>
           </>
         }
-        text="!!! This text will not be rendered !!!"
+        text="!!! This text will not be rendered !"
         confirmButtonText="Confirm and do something"
         onClose={onDialogClose}
         onConfirm={onConfirmDialogConfirm}
