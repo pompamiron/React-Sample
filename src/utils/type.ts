@@ -2,8 +2,8 @@
 export type ObjectPropByName = Record<string, any>;
 
 export type LinkToPage = {
-  icon?: string; 
-  path?: string; 
-  title?: string; 
-  subtitle?: string;
+	icon?: string;
+	path?: string;
+	title?: string;
+	subtitle?: string;
 };
