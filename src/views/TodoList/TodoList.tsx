@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { Card, List, ListItem, ListItemText, FormControl, InputLabel, Input, Button, Grid, Typography } from "@mui/material";
+import {
+	Card,
+	List,
+	ListItem,
+	ListItemText,
+	FormControl,
+	InputLabel,
+	Input,
+	Button,
+	Grid,
+	Typography,
+} from "@mui/material";
 import { makeStyles } from "@material-ui/core/styles";
 
 interface Todo {
@@ -26,7 +37,7 @@ const useStyles = makeStyles({
 	},
 	card: {
 		width: "30rem",
-	  },  
+	},
 });
 
 const TodoList: React.FC = () => {
@@ -69,60 +80,59 @@ const TodoList: React.FC = () => {
 
 	return (
 		<Grid item container justifyContent="center">
-		<Card className={classes.card}>
-			<Grid item container>
-			<Grid item container justifyContent="center">
-				<Typography variant="h3">Todo List</Typography>
-			</Grid>
-			<Grid item container justifyContent="center">
-				<form className={classes.form} onSubmit={handleAddTodo}>
-					<FormControl className={classes.formControl}>
-						<InputLabel htmlFor="task">Task</InputLabel>
-						<Input
-							className={classes.input}
-							id="task"
-							name="task"
-							onChange={handleTaskChange}
-							value={task}
-						/>
-					</FormControl>
-					<Button variant="contained" color="primary" type="submit">
-						Add Todo
-					</Button>
-				</form>
-			</Grid>
-			<Grid container justifyContent="center">
-				<List>
-					<Grid item container className={classes.list}>
-						{todos.map((todo) => (
-							<ListItem key={todo.id}>
-								<Grid item container key={todo.id} justifyContent="space-between">
-									<Grid item>
-										<ListItemText
-											primary={todo.task}
-											secondary={todo.done ? "done" : "not done"}
-											onClick={() => handleTodoClick(todo.id)}
-										/>
-									</Grid>
-									<Grid item>
-										<Button
-											variant="contained"
-											color="secondary"
-											onClick={() => handleDeleteTodo(todo.id)}
-										>
-											Delete
-										</Button>
-									</Grid>
-								</Grid>
-							</ListItem>
-						))}
+			<Card className={classes.card}>
+				<Grid item container>
+					<Grid item container justifyContent="center">
+						<Typography variant="h3">Todo List</Typography>
 					</Grid>
-				</List>
-			</Grid>
-			</Grid>
-		</Card>
+					<Grid item container justifyContent="center">
+						<form className={classes.form} onSubmit={handleAddTodo}>
+							<FormControl className={classes.formControl}>
+								<InputLabel htmlFor="task">Task</InputLabel>
+								<Input
+									className={classes.input}
+									id="task"
+									name="task"
+									onChange={handleTaskChange}
+									value={task}
+								/>
+							</FormControl>
+							<Button variant="contained" color="primary" type="submit">
+								Add Todo
+							</Button>
+						</form>
+					</Grid>
+					<Grid container justifyContent="center">
+						<List>
+							<Grid item container className={classes.list}>
+								{todos.map((todo) => (
+									<ListItem key={todo.id}>
+										<Grid item container key={todo.id} justifyContent="space-between">
+											<Grid item>
+												<ListItemText
+													primary={todo.task}
+													secondary={todo.done ? "done" : "not done"}
+													onClick={() => handleTodoClick(todo.id)}
+												/>
+											</Grid>
+											<Grid item>
+												<Button
+													variant="contained"
+													color="secondary"
+													onClick={() => handleDeleteTodo(todo.id)}
+												>
+													Delete
+												</Button>
+											</Grid>
+										</Grid>
+									</ListItem>
+								))}
+							</Grid>
+						</List>
+					</Grid>
+				</Grid>
+			</Card>
 		</Grid>
-
 	);
 };
 

@@ -190,9 +190,9 @@ export const LIGHT_THEME: ThemeOptions = {
 		},
 		tonalOffset: 0.5,
 	},
-	colors:{
-		...colors
-	}
+	colors: {
+		...colors,
+	},
 };
 
 export default LIGHT_THEME;

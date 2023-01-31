@@ -192,9 +192,9 @@ export const DARK_THEME: ThemeOptions = {
 		},
 		tonalOffset: 0.5,
 	},
-	colors:{
-		...colors
-	}
+	colors: {
+		...colors,
+	},
 };
 
 export default DARK_THEME;

@@ -1,19 +1,8 @@
-import {
-	Button,
-	Card,
-	Box,
-	Grid,
-	Typography,
-	useTheme,
-	Divider,
-	ListItem,
-	ListItemText,
-	List,
-} from "@mui/material";
+import { Button, Card, Box, Grid, Typography, useTheme, Divider, ListItem, ListItemText, List } from "@mui/material";
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
-import { AvatarSuccess, ListItemAvatarWrapper, useStyles } from "./styles"
+import { AvatarSuccess, ListItemAvatarWrapper, useStyles } from "./styles";
 
 export const AccountBalance = () => {
 	const theme = useTheme();
@@ -40,7 +29,7 @@ export const AccountBalance = () => {
 				return val + "%";
 			},
 			style: {
-				colors: [theme.colors.alpha.trueWhite[100]]
+				colors: [theme.colors.alpha.trueWhite[100]],
 			},
 			background: {
 				enabled: true,
@@ -73,7 +62,7 @@ export const AccountBalance = () => {
 		labels: ["Bitcoin", "Ripple", "Cardano", "Ethereum"],
 		legend: {
 			labels: {
-				colors: theme.colors.alpha.trueWhite[100]
+				colors: theme.colors.alpha.trueWhite[100],
 			},
 			show: false,
 		},
@@ -89,7 +78,7 @@ export const AccountBalance = () => {
 
 	return (
 		<Card className={classes.card}>
-			<Grid spacing={2} container >
+			<Grid spacing={2} container>
 				<Grid item xs={12} md={6}>
 					<Box p={4}>
 						<Typography
@@ -191,7 +180,9 @@ export const AccountBalance = () => {
 											<Typography align="right" variant="h4" noWrap>
 												20%
 											</Typography>
-											<Typography variant="caption" color="success">+2.54%</Typography>
+											<Typography variant="caption" color="success">
+												+2.54%
+											</Typography>
 										</Box>
 									</ListItem>
 									<ListItem disableGutters>
@@ -211,7 +202,9 @@ export const AccountBalance = () => {
 											<Typography align="right" variant="h4" noWrap>
 												10%
 											</Typography>
-											<Typography variant="caption" color="error">-1.22%</Typography>
+											<Typography variant="caption" color="error">
+												-1.22%
+											</Typography>
 										</Box>
 									</ListItem>
 									<ListItem disableGutters>
@@ -231,7 +224,9 @@ export const AccountBalance = () => {
 											<Typography align="right" variant="h4" noWrap>
 												40%
 											</Typography>
-											<Typography variant="caption" color="success">+10.50%</Typography>
+											<Typography variant="caption" color="success">
+												+10.50%
+											</Typography>
 										</Box>
 									</ListItem>
 									<ListItem disableGutters>
@@ -251,7 +246,9 @@ export const AccountBalance = () => {
 											<Typography align="right" variant="h4" noWrap>
 												30%
 											</Typography>
-											<Typography variant="caption" color="error">-12.38%</Typography>
+											<Typography variant="caption" color="error">
+												-12.38%
+											</Typography>
 										</Box>
 									</ListItem>
 								</List>
