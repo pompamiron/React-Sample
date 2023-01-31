@@ -24,9 +24,14 @@ const SIDEBAR_ITEMS: Array<LinkToPage> = [
 		icon: "home",
 	},
 	{
-		title: "Dashboard",
-		path: "/dashboard",
-		icon: "dashboard",
+		title: "Dashboards",
+		path: "/dashboards",
+		icon: "dashboards",
+	},
+	{
+		title: "Todo list",
+		path: "/todolist",
+		icon: "menu",
 	},
 	{
 		title: "Profile",

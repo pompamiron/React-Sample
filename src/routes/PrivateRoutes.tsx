@@ -3,6 +3,7 @@ import { NotFoundView, UserView } from "../views";
 import AboutView from "../views/About";
 import { WelcomeView } from "../views/Welcome";
 import { Dashboards } from "../views/Dashboards";
+import { TodoList } from "../views/TodoList";
 
 /**
  * List of routes available only for authenticated users
@@ -14,6 +15,7 @@ const PrivateRoutes = () => {
 			<Route path="/" element={<WelcomeView />} />
 			<Route path="welcome" element={<WelcomeView />} />
 			<Route path="dashboards" element={<Dashboards />} />,
+			<Route path="todolist" element={<TodoList />} />,
 			<Route path="user" element={<UserView />} />
 			<Route path="about" element={<AboutView />} />,
 			<Route path="*" element={<NotFoundView />} />

@@ -29,7 +29,6 @@ const TopBar: FunctionComponent<Props> = ({ endNode, startNode, title = "", ...r
 					variant="h6"
 					sx={{
 						marginX: 1,
-						flexGrow: 1,
 						textAlign: "center",
 						whiteSpace: "nowrap",
 					}}
