@@ -1,50 +1,18 @@
-import {
-	Button,
-	Card,
-	Box,
-	CardActions,
-	Typography,
-	Avatar,
-	alpha,
-	Stack,
-	Divider,
-	styled,
-	useTheme,
-} from "@mui/material";
-import { Label } from "../../components";
+import { Grid, Button, Card, Box, CardActions, Typography, Stack, Divider, useTheme } from "@mui/material";
+import { Label } from "src/components";
 import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
 import TrendingDownTwoToneIcon from "@mui/icons-material/TrendingDownTwoTone";
 import TrendingUpTwoToneIcon from "@mui/icons-material/TrendingUpTwoTone";
 import TrendingFlatTwoToneIcon from "@mui/icons-material/TrendingFlatTwoTone";
+import { ListItemAvatarWrapper } from "./styles";
+import { asset } from "./types";
 
-const AvatarWrapper = styled(Avatar)(
-	({ theme }) => `
-    margin: ${theme.spacing(0, 0, 1, -0.5)};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: ${theme.spacing(1)};
-    padding: ${theme.spacing(0.5)};
-    border-radius: 60px;
-    height: ${theme.spacing(5.5)};
-    width: ${theme.spacing(5.5)};
-    background: ${
-		theme.palette.mode === "dark" ? theme.colors.alpha.trueWhite[30] : alpha(theme.colors.alpha.black[100], 0.07)
-	};
-  
-    img {
-      background: ${theme.colors.alpha.trueWhite[100]};
-      padding: ${theme.spacing(0.5)};
-      display: block;
-      border-radius: inherit;
-      height: ${theme.spacing(4.5)};
-      width: ${theme.spacing(4.5)};
-    }
-`
-);
+interface WatchListRowProps {
+	assets: asset[];
+}
 
-function WatchListRow() {
+export const WatchListRow: React.FC<WatchListRowProps> = ({ assets }) => {
 	const theme = useTheme();
 
 	const Box1Options: ApexOptions = {
@@ -104,206 +72,109 @@ function WatchListRow() {
 		},
 	};
 
-	const Box1Data = [
-		{
-			name: "Bitcoin",
-			data: [55.701, 57.598, 48.607, 46.439, 58.755, 46.978, 58.16],
-		},
-	];
-
-	const Box2Data = [
-		{
-			name: "Ethereum",
-			data: [1.854, 1.873, 1.992, 2.009, 1.909, 1.942, 1.884],
-		},
-	];
-
-	const Box3Data = [
-		{
-			name: "Cardano",
-			data: [13, 16, 14, 18, 8, 11, 20],
-		},
-	];
+	const trendIconMapping = (percentageChange: number) => {
+		if (percentageChange >= 1) {
+			return (
+				<TrendingUpTwoToneIcon
+					sx={{
+						color: `${theme.colors.success.main}`,
+					}}
+				/>
+			);
+		} else if (percentageChange <= -1) {
+			return (
+				<TrendingDownTwoToneIcon
+					sx={{
+						color: `${theme.colors.error.main}`,
+					}}
+				/>
+			);
+		}
+		return (
+			<TrendingFlatTwoToneIcon
+				sx={{
+					color: `${theme.colors.warning.main}`,
+				}}
+			/>
+		);
+	};
 
 	return (
-		<Card>
-			<Stack
-				direction="row"
-				justifyContent="space-evenly"
-				alignItems="stretch"
-				divider={<Divider orientation="vertical" flexItem />}
-				spacing={0}
-			>
-				<Box
+		<Grid item container>
+			<Card>
+				<Stack
+					direction="row"
+					justifyContent="space-evenly"
+					alignItems="stretch"
+					divider={<Divider orientation="vertical" flexItem />}
+					spacing={0}
+				>
+					{assets.slice(0, 3).map(({ alt, name, logo, percentage, changePercentage, chartData, value }) => (
+						<Grid item container xs={12} md={4} sx={{ padding: "1.5rem" }}>
+							<Grid item container alignItems="flex-start" justifyContent="space-between">
+								<Grid item>
+									<Grid container alignItems="center">
+										<ListItemAvatarWrapper>
+											<img alt={alt} src={logo} />
+										</ListItemAvatarWrapper>
+										<Grid item>
+											<Typography variant="h4" noWrap>
+												{name}
+											</Typography>
+											<Typography variant="subtitle1" noWrap>
+												{alt}
+											</Typography>
+										</Grid>
+									</Grid>
+								</Grid>
+								<Grid item>
+									<Label color="secondary">24h</Label>
+								</Grid>
+							</Grid>
+							<Grid item container mt={3} alignItems="center" justifyContent="space-between">
+								<Grid item>
+									<Grid item container>
+										<Typography variant="h2">
+											{value.toLocaleString("en-US", { style: "currency", currency: "USD" })}
+										</Typography>
+									</Grid>
+									<Grid item container>
+										<Typography variant="caption" color="success">
+											<b>
+												{changePercentage >= 0 && "+"}
+												{changePercentage}%
+											</b>
+										</Typography>
+									</Grid>
+								</Grid>
+								<Grid item>{trendIconMapping(changePercentage)}</Grid>
+							</Grid>
+							<Grid item container>
+								<Chart
+									options={Box1Options}
+									series={[chartData]}
+									type="line"
+									height={100}
+									width={"100%"}
+								/>
+							</Grid>
+						</Grid>
+					))}
+				</Stack>
+				<Divider />
+				<CardActions
+					disableSpacing
 					sx={{
-						width: "100%",
 						p: 3,
+						display: "flex",
+						justifyContent: "center",
 					}}
 				>
-					<Box display="flex" alignItems="flex-start" justifyContent="space-between">
-						<Box display="flex" alignItems="center">
-							<AvatarWrapper>
-								<img alt="BTC" src="/img/logo/bitcoin.png" />
-							</AvatarWrapper>
-							<Box>
-								<Typography variant="h4" noWrap>
-									Bitcoin
-								</Typography>
-								<Typography variant="subtitle1" noWrap>
-									BTC
-								</Typography>
-							</Box>
-						</Box>
-						<Label color="secondary">24h</Label>
-					</Box>
-					<Box mt={3} display="flex" alignItems="center" justifyContent="space-between">
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-							}}
-						>
-							<Typography
-								variant="h2"
-								sx={{
-									pr: 1,
-								}}
-							>
-								$56,475.99
-							</Typography>
-							<Typography variant="caption" color="success">
-								<b>+12.5%</b>
-							</Typography>
-						</Box>
-						<TrendingUpTwoToneIcon
-							sx={{
-								color: `${theme.colors.success.main}`,
-							}}
-						/>
-					</Box>
-					<Box pt={2}>
-						<Chart options={Box1Options} series={Box1Data} type="line" height={100} />
-					</Box>
-				</Box>
-				<Box
-					sx={{
-						width: "100%",
-						p: 3,
-					}}
-				>
-					<Box display="flex" alignItems="flex-start" justifyContent="space-between">
-						<Box display="flex" alignItems="center">
-							<AvatarWrapper>
-								<img alt="ETH" src="/img/logo/ethereum.png" />
-							</AvatarWrapper>
-							<Box>
-								<Typography variant="h4" noWrap>
-									Ethereum
-								</Typography>
-								<Typography variant="subtitle1" noWrap>
-									ETH
-								</Typography>
-							</Box>
-						</Box>
-						<Label color="secondary">24h</Label>
-					</Box>
-					<Box mt={3} display="flex" alignItems="center" justifyContent="space-between">
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-							}}
-						>
-							<Typography
-								variant="h2"
-								sx={{
-									pr: 1,
-								}}
-							>
-								$1,968.00
-							</Typography>
-							<Typography variant="caption" color="error">
-								<b>-3.24%</b>
-							</Typography>
-						</Box>
-						<TrendingDownTwoToneIcon
-							sx={{
-								color: `${theme.colors.error.main}`,
-							}}
-						/>
-					</Box>
-					<Box pt={2}>
-						<Chart options={Box1Options} series={Box2Data} type="line" height={100} />
-					</Box>
-				</Box>
-				<Box
-					sx={{
-						width: "100%",
-						p: 3,
-					}}
-				>
-					<Box display="flex" alignItems="flex-start" justifyContent="space-between">
-						<Box display="flex" alignItems="center">
-							<AvatarWrapper>
-								<img alt="ADA" src="/img/logo/cardano.png" />
-							</AvatarWrapper>
-							<Box>
-								<Typography variant="h4" noWrap>
-									Cardano
-								</Typography>
-								<Typography variant="subtitle1" noWrap>
-									ADA
-								</Typography>
-							</Box>
-						</Box>
-						<Label color="secondary">24h</Label>
-					</Box>
-					<Box mt={3} display="flex" alignItems="center" justifyContent="space-between">
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-							}}
-						>
-							<Typography
-								variant="h2"
-								sx={{
-									pr: 1,
-								}}
-							>
-								$23.00
-							</Typography>
-							<Typography variant="caption" color="error">
-								<b>-0.33%</b>
-							</Typography>
-						</Box>
-						<TrendingFlatTwoToneIcon
-							sx={{
-								color: `${theme.colors.warning.main}`,
-							}}
-						/>
-					</Box>
-					<Box pt={2}>
-						<Chart options={Box1Options} series={Box3Data} type="line" height={100} />
-					</Box>
-				</Box>
-			</Stack>
-			<Divider />
-			<CardActions
-				disableSpacing
-				sx={{
-					p: 3,
-					display: "flex",
-					justifyContent: "center",
-				}}
-			>
-				<Button variant="outlined">View more assets</Button>
-			</CardActions>
-		</Card>
+					<Button variant="outlined">View more assets</Button>
+				</CardActions>
+			</Card>
+		</Grid>
 	);
-}
+};
 
 export default WatchListRow;

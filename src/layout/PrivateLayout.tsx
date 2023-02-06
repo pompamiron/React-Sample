@@ -1,9 +1,9 @@
 import { useState, useCallback, FunctionComponent, PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 import { Stack } from "@mui/material";
-import { AppIconButton, ErrorBoundary } from "../components";
-import { LinkToPage } from "../utils/type";
-import { useOnMobile } from "../hooks/layout";
+import { AppIconButton, ErrorBoundary } from "src/components";
+import { LinkToPage } from "src/utils/type";
+import { useOnMobile } from "src/hooks/layout";
 import {
 	SIDEBAR_DESKTOP_ANCHOR,
 	SIDEBAR_MOBILE_ANCHOR,
@@ -24,23 +24,13 @@ const SIDEBAR_ITEMS: Array<LinkToPage> = [
 		icon: "home",
 	},
 	{
-		title: "Dashboards",
-		path: "/dashboards",
-		icon: "dashboards",
+		title: "Transactions",
+		path: "/transactions",
+		icon: "menu",
 	},
 	{
 		title: "Todo list",
 		path: "/todolist",
-		icon: "menu",
-	},
-	{
-		title: "Profile",
-		path: "/user",
-		icon: "account",
-	},
-	{
-		title: "About",
-		path: "/about",
 		icon: "info",
 	},
 ];
@@ -57,10 +47,6 @@ const PrivateLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
 	// Variant 1 - Sidebar is static on desktop and is a drawer on mobile
 	const sidebarOpen = onMobile ? sideBarVisible : true;
 	const sidebarVariant = onMobile ? "temporary" : "persistent";
-
-	// Variant 2 - Sidebar is drawer on mobile and desktop
-	// const sidebarOpen = sideBarVisible;
-	// const sidebarVariant = 'temporary';
 
 	const title = "Chalakorn's Sample";
 	document.title = title;

@@ -1,36 +1,15 @@
 import { Card, Box, Typography, Avatar, Grid, alpha, useTheme, styled } from "@mui/material";
-// TODO: Fix this
-import { Label } from "../../components";
+import { Label } from "src/components";
 import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
+import { ListItemAvatarWrapper } from "./styles";
+import { asset } from "./types";
 
-const AvatarWrapper = styled(Avatar)(
-	({ theme }) => `
-    margin: ${theme.spacing(0, 0, 1, -0.5)};
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: ${theme.spacing(1)};
-    padding: ${theme.spacing(0.5)};
-    border-radius: 60px;
-    height: ${theme.spacing(5.5)};
-    width: ${theme.spacing(5.5)};
-    background: ${
-		theme.palette.mode === "dark" ? theme.colors.alpha.trueWhite[30] : alpha(theme.colors.alpha.black[100], 0.07)
-	};
-  
-    img {
-      background: ${theme.colors.alpha.trueWhite[100]};
-      padding: ${theme.spacing(0.5)};
-      display: block;
-      border-radius: inherit;
-      height: ${theme.spacing(4.5)};
-      width: ${theme.spacing(4.5)};
-    }
-`
-);
+interface WatchListColumnProps {
+	assets: asset[];
+}
 
-function WatchListColumn() {
+export const WatchListColumn: React.FC<WatchListColumnProps> = ({ assets }) => {
 	const theme = useTheme();
 
 	const chartOptions: ApexOptions = {
@@ -104,230 +83,58 @@ function WatchListColumn() {
 			},
 		},
 	};
-	const chart1Data = [
-		{
-			name: "Bitcoin Price",
-			data: [55.701, 57.598, 48.607, 46.439, 58.755, 46.978, 58.16],
-		},
-	];
-	const chart2Data = [
-		{
-			name: "Ethereum Price",
-			data: [13, 16, 14, 20, 8, 11, 20],
-		},
-	];
-	const chart3Data = [
-		{
-			name: "Cardano Price",
-			data: [51.85, 41.77, 22.09, 42.0, 71.9, 51.84, 31.84],
-		},
-	];
 
 	return (
-		<Grid container direction="row" justifyContent="center" alignItems="stretch" spacing={3}>
-			<Grid item md={4} xs={12}>
-				<Card
-					sx={{
-						overflow: "visible",
-					}}
-				>
-					<Box
-						sx={{
-							p: 3,
-						}}
-					>
-						<Box display="flex" alignItems="center">
-							<AvatarWrapper>
-								<img alt="BTC" src="/img/logo/bitcoin.png" />
-							</AvatarWrapper>
-							<Box>
-								<Typography variant="h4" noWrap>
-									Bitcoin
+		<Grid container item justifyContent="center" spacing={4}>
+			{assets.slice(0, 3).map(({ alt, name, logo, percentage, change, chartData, value }) => (
+				<Grid item container lg={4} md={12}>
+					<Card sx={{ overflow: "hidden" }}>
+						<Grid item container spacing={4} sx={{ padding: "1.5rem" }}>
+							<Grid item container alignItems="center">
+								<Grid item>
+									<ListItemAvatarWrapper>
+										<img alt={alt} src={logo} />
+									</ListItemAvatarWrapper>
+								</Grid>
+								<Grid item sx={{ textOverflow: "ellipsis", overflow: "hidden" }}>
+									<Typography variant="h4" sx={{ textOverflow: "ellipsis", overflow: "hidden" }}>
+										{name}
+									</Typography>
+									<Typography variant="subtitle1" noWrap>
+										{alt}
+									</Typography>
+								</Grid>
+							</Grid>
+							<Grid item container alignItems="center" justifyContent="flex-start" sx={{ pt: 3 }}>
+								<Grid item container>
+									<Typography variant="h3">
+										{value.toLocaleString("en-US", { style: "currency", currency: "USD" })}
+									</Typography>
+								</Grid>
+								<Grid item container>
+									<Typography variant="caption" color="success">
+										<b>
+											{change >= 0 && "+"}
+											{change}%
+										</b>
+									</Typography>
+								</Grid>
+							</Grid>
+							<Grid item container alignItems="center" justifyContent="flex-start">
+								<Label color="success">
+									{change.toLocaleString("en-US", { style: "currency", currency: "USD" })}
+								</Label>
+								<Typography variant="body2" color="text.secondary" sx={{ pl: 1 }}>
+									last 24h
 								</Typography>
-								<Typography variant="subtitle1" noWrap>
-									BTC
-								</Typography>
-							</Box>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-								pt: 3,
-							}}
-						>
-							<Typography
-								variant="h2"
-								sx={{
-									pr: 1,
-									mb: 1,
-								}}
-							>
-								$56,475.99
-							</Typography>
-							<Typography variant="caption" color="success">
-								<b>+12.5%</b>
-							</Typography>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-							}}
-						>
-							<Label color="success">+$500</Label>
-							<Typography
-								variant="body2"
-								color="text.secondary"
-								sx={{
-									pl: 1,
-								}}
-							>
-								last 24h
-							</Typography>
-						</Box>
-					</Box>
-					<Chart options={chartOptions} series={chart1Data} type="area" height={200} />
-				</Card>
-			</Grid>
-			<Grid item md={4} xs={12}>
-				<Card
-					sx={{
-						overflow: "visible",
-					}}
-				>
-					<Box
-						sx={{
-							p: 3,
-						}}
-					>
-						<Box display="flex" alignItems="center">
-							<AvatarWrapper>
-								<img alt="ETH" src="/img/logo/ethereum.png" />
-							</AvatarWrapper>
-							<Box>
-								<Typography variant="h4" noWrap>
-									Ethereum
-								</Typography>
-								<Typography variant="subtitle1" noWrap>
-									ETH
-								</Typography>
-							</Box>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-								pt: 3,
-							}}
-						>
-							<Typography
-								variant="h2"
-								sx={{
-									pr: 1,
-									mb: 1,
-								}}
-							>
-								$1,968.00
-							</Typography>
-							<Typography variant="caption" color="error">
-								<b>-3.24%</b>
-							</Typography>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-							}}
-						>
-							<Label color="error">-$90</Label>
-							<Typography
-								variant="body2"
-								color="text.secondary"
-								sx={{
-									pl: 1,
-								}}
-							>
-								last 24h
-							</Typography>
-						</Box>
-					</Box>
-					<Chart options={chartOptions} series={chart2Data} type="area" height={200} />
-				</Card>
-			</Grid>
-			<Grid item md={4} xs={12}>
-				<Card
-					sx={{
-						overflow: "visible",
-					}}
-				>
-					<Box
-						sx={{
-							p: 3,
-						}}
-					>
-						<Box display="flex" alignItems="center">
-							<AvatarWrapper>
-								<img alt="ADA" src="/img/logo/cardano.png" />
-							</AvatarWrapper>
-							<Box>
-								<Typography variant="h4" noWrap>
-									Cardano
-								</Typography>
-								<Typography variant="subtitle1" noWrap>
-									ADA
-								</Typography>
-							</Box>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-								pt: 3,
-							}}
-						>
-							<Typography
-								variant="h2"
-								sx={{
-									pr: 1,
-									mb: 1,
-								}}
-							>
-								$23.00
-							</Typography>
-							<Typography variant="caption" color="error">
-								<b>-0.33%</b>
-							</Typography>
-						</Box>
-						<Box
-							sx={{
-								display: "flex",
-								alignItems: "center",
-								justifyContent: "flex-start",
-							}}
-						>
-							<Label color="error">-$5</Label>
-							<Typography
-								variant="body2"
-								color="text.secondary"
-								sx={{
-									pl: 1,
-								}}
-							>
-								last 24h
-							</Typography>
-						</Box>
-					</Box>
-					<Chart options={chartOptions} series={chart3Data} type="area" height={200} />
-				</Card>
-			</Grid>
+							</Grid>
+						</Grid>
+						<Chart options={chartOptions} series={[chartData]} type="area" height={200} />
+					</Card>
+				</Grid>
+			))}
 		</Grid>
 	);
-}
+};
 
 export default WatchListColumn;

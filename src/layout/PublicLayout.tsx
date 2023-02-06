@@ -1,11 +1,11 @@
 import { FunctionComponent, PropsWithChildren, useCallback, useState } from "react";
 import { Stack } from "@mui/material/";
-import { useAppStore } from "../store/AppStore";
-import { ErrorBoundary, AppIconButton } from "../components";
-import { LinkToPage } from "../utils/type";
-import { useOnMobile } from "../hooks/layout";
+import { useAppStore } from "src/store/AppStore";
+import { ErrorBoundary, AppIconButton } from "src/components";
+import { LinkToPage } from "src/utils/type";
+import { useOnMobile } from "src/hooks/layout";
 import { BOTTOMBAR_DESKTOP_VISIBLE, TOPBAR_DESKTOP_HEIGHT, TOPBAR_MOBILE_HEIGHT } from "./config";
-import { useEventSwitchDarkMode } from "../hooks/event";
+import { useEventSwitchDarkMode } from "src/hooks/event";
 import TopBar from "./TopBar";
 import SideBar from "./SideBar";
 import BottomBar from "./BottomBar";
@@ -89,14 +89,12 @@ const PublicLayout: FunctionComponent<PropsWithChildren> = ({ children }) => {
 					title={title}
 					endNode={
 						<AppIconButton
-							// icon={state.darkMode ? 'day' : 'night'} // Variant 1
-							icon="daynight" // Variant 2
+							icon="daynight"
 							title={state.darkMode ? "Switch to Light mode" : "Switch to Dark mode"}
 							onClick={onSwitchDarkMode}
 						/>
 					}
 				/>
-
 				<SideBar
 					anchor="left"
 					open={sidebarOpen}

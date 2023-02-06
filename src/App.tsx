@@ -2,7 +2,7 @@ import { AppStore } from "./store";
 import { AppThemeProvider } from "./theme";
 import Routes from "./routes";
 import Layout from "./layout";
-import { ErrorBoundary } from "./components";
+import { ErrorBoundary, Container } from "./components";
 import { BrowserRouter } from "react-router-dom";
 
 /**
@@ -15,7 +15,9 @@ const App = () => {
 				<AppThemeProvider>
 					<BrowserRouter>
 						<Layout>
-							<Routes />
+							<Container>
+								<Routes />
+							</Container>
 						</Layout>
 					</BrowserRouter>
 				</AppThemeProvider>

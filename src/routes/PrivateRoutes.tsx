@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
-import { NotFoundView, UserView } from "../views";
+import { NotFoundView } from "../views";
 import AboutView from "../views/About";
-import { WelcomeView } from "../views/Welcome";
-import { Dashboards } from "../views/Dashboards";
+import { HomePage } from "../views/HomePage";
 import { TodoList } from "../views/TodoList";
+import { Transactions } from "../views/Transactions";
 
 /**
  * List of routes available only for authenticated users
@@ -12,11 +12,9 @@ import { TodoList } from "../views/TodoList";
 const PrivateRoutes = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<WelcomeView />} />
-			<Route path="welcome" element={<WelcomeView />} />
-			<Route path="dashboards" element={<Dashboards />} />,
+			<Route path="/" element={<HomePage />} />
+			<Route path="transactions" element={<Transactions />} />,
 			<Route path="todolist" element={<TodoList />} />,
-			<Route path="user" element={<UserView />} />
 			<Route path="about" element={<AboutView />} />,
 			<Route path="*" element={<NotFoundView />} />
 		</Routes>

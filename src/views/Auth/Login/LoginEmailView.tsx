@@ -1,9 +1,9 @@
 import { SyntheticEvent, useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Grid, TextField, Card, CardHeader, CardContent, InputAdornment } from "@mui/material";
-import { useAppStore } from "../../../store";
-import { AppButton, AppLink, AppIconButton, AppAlert, AppForm } from "../../../components";
-import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from "../../../utils/form";
+import { useAppStore } from "src/store";
+import { AppButton, AppLink, AppIconButton, AppAlert, AppForm } from "src/components";
+import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from "src/utils/form";
 
 const VALIDATE_FORM_LOGIN_EMAIL = {
 	email: {
@@ -112,6 +112,11 @@ const LoginEmailView = () => {
 						</AppButton>
 						<Button variant="text" color="inherit" component={AppLink} to="/auth/recovery/password">
 							Forgot Password
+						</Button>
+					</Grid>
+					<Grid container justifyContent="center" alignItems="center">
+						<Button variant="text" color="secondary" component={AppLink} to="/auth/recovery/password">
+							Sign Up
 						</Button>
 					</Grid>
 				</CardContent>

@@ -36,6 +36,7 @@
 		"@mui/material": "latest",
 		"@mui/styles": "lastest",
 		"apexcharts": "latest",
+		"classnames": "^2.3.2",
 		"date-fns": "latest",
 		"eslint-config-react-app": "^7.0.1",
 		"prop-types": "^15.8.1",

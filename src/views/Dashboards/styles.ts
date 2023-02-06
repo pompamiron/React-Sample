@@ -1,12 +1,12 @@
 import { alpha } from "@mui/material";
 import { styled, Avatar, ListItemAvatar, Card } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
 
-export const useStyles = makeStyles({
-	card: {
-		width: "100%",
-	},
-});
+export const AvatarAddWrapper = styled(Avatar)(({ theme }) => ({
+	background: theme.colors.alpha.black[10],
+	color: theme.colors.primary.main,
+	width: theme.spacing(8),
+	height: theme.spacing(8),
+}));
 
 export const AvatarSuccess = styled(Avatar)(({ theme }) => ({
 	color: theme.palette.success.contrastText,
@@ -15,6 +15,27 @@ export const AvatarSuccess = styled(Avatar)(({ theme }) => ({
 	boxShadow: theme.colors.shadows.success,
 	backgroundColor: theme.palette.success.main,
 }));
+
+export const AvatarWrapperError = styled(Avatar)(
+	({ theme }) => `
+      background-color: ${theme.colors.error.lighter};
+      color:  ${theme.colors.error.main};
+`
+);
+
+export const AvatarWrapperSuccess = styled(Avatar)(
+	({ theme }) => `
+      background-color: ${theme.colors.success.lighter};
+      color:  ${theme.colors.success.main};
+`
+);
+
+export const AvatarWrapperWarning = styled(Avatar)(
+	({ theme }) => `
+      background-color: ${theme.colors.warning.lighter};
+      color:  ${theme.colors.warning.main};
+`
+);
 
 export const ListItemAvatarWrapper = styled(ListItemAvatar)(({ theme }) => ({
 	minWidth: 0,
@@ -38,35 +59,23 @@ export const ListItemAvatarWrapper = styled(ListItemAvatar)(({ theme }) => ({
 	},
 }));
 
-export const AvatarAddWrapper = styled(Avatar)(
-	({ theme }) => `
-        background: ${theme.colors.alpha.black[10]};
-        color: ${theme.colors.primary.main};
-        width: ${theme.spacing(8)};
-        height: ${theme.spacing(8)};
-`
-);
+export const CardAddAction = styled(Card)(({ theme }) => ({
+	border: `${theme.colors.primary.main} dashed 1px`,
+	height: "100%",
+	color: theme.colors.primary.main,
+	transition: theme.transitions.create(["all"]),
+	".MuiCardActionArea-root": {
+		height: "100%",
+		justifyContent: "center",
+		alignItems: "center",
+		display: "flex",
+	},
 
-export const CardAddAction = styled(Card)(
-	({ theme }) => `
-        border: ${theme.colors.primary.main} dashed 1px;
-        height: 100%;
-        color: ${theme.colors.primary.main};
-        transition: ${theme.transitions.create(["all"])};
-        
-        .MuiCardActionArea-root {
-          height: 100%;
-          justify-content: center;
-          align-items: center;
-          display: flex;
-        }
-        
-        .MuiTouchRipple-root {
-          opacity: .2;
-        }
-        
-        &:hover {
-          border-color: ${theme.colors.alpha.black[70]};
-        }
-`
-);
+	".MuiTouchRipple-root": {
+		opacity: 0.2,
+	},
+
+	"&:hover": {
+		borderColor: theme.colors.alpha.black[70],
+	},
+}));
