@@ -1,10 +1,14 @@
-import { Button, Card, Box, Grid, Typography, useTheme, ListItem, ListItemText, List } from "@mui/material";
+import { Button, Card, Grid, Typography, useTheme, ListItem, ListItemText, List } from "@mui/material";
 import TrendingUp from "@mui/icons-material/TrendingUp";
 import Chart from "react-apexcharts";
 import type { ApexOptions } from "apexcharts";
 import { AvatarSuccess, ListItemAvatarWrapper } from "./styles";
+import { asset } from "./types";
+interface AccountBalanceProps {
+	assets: asset[];
+}
 
-export const AccountBalance = () => {
+export const AccountBalance: React.FC<AccountBalanceProps> = ({ assets }) => {
 	const theme = useTheme();
 	const chartOptions: ApexOptions = {
 		chart: {
@@ -73,43 +77,6 @@ export const AccountBalance = () => {
 		},
 	};
 
-	const assets: {
-		alt: string;
-		name: string;
-		logo: string;
-		percentage: string;
-		changes: number;
-	}[] = [
-		{
-			alt: "BTC",
-			name: "Bitcoin",
-			logo: "/img/logo/bitcoin.png",
-			percentage: "20",
-			changes: 2.54,
-		},
-		{
-			alt: "XRP",
-			name: "Ripple",
-			logo: "/img/logo/ripple.png",
-			percentage: "10",
-			changes: -1.22,
-		},
-		{
-			alt: "ADA",
-			name: "Cardano",
-			logo: "/img/logo/cardano.png",
-			percentage: "40",
-			changes: 10.5,
-		},
-		{
-			alt: "ETH",
-			name: "Ethereum",
-			logo: "/img/logo/ethereum.png",
-			percentage: "30",
-			changes: -12.38,
-		},
-	];
-
 	const chartSeries = [20, 10, 40, 30];
 
 	return (
@@ -126,10 +93,7 @@ export const AccountBalance = () => {
 							<Typography
 								variant="h2"
 								gutterBottom
-								sx={{
-									textOverflow: "ellipsis",
-									overflow: "hidden",
-								}}
+								noWrap
 							>
 								$54,584.23
 							</Typography>
@@ -139,10 +103,7 @@ export const AccountBalance = () => {
 								variant="h4"
 								fontWeight="normal"
 								color="text.secondary"
-								sx={{
-									textOverflow: "ellipsis",
-									overflow: "hidden",
-								}}
+								noWrap
 							>
 								1.0045983485234 BTC
 							</Typography>
@@ -177,30 +138,41 @@ export const AccountBalance = () => {
 					<Grid item md={12} lg={6} container justifyContent="center" alignItems="center">
 						<Chart height={250} options={chartOptions} series={chartSeries} type="donut" />
 					</Grid>
-					<Grid item xs container display="flex" alignItems="center">
+					<Grid item xs container alignItems="center">
 						<List disablePadding sx={{ width: "100%" }}>
-							{assets.map(({ alt, name, logo, percentage, changes }) => (
+							{assets.map(({ alt, name, logo, percentage, changePercentage }) => (
 								<ListItem key={alt} disableGutters>
-									<ListItemAvatarWrapper>
-										<img alt={alt} src={logo} />
-									</ListItemAvatarWrapper>
-									<ListItemText
-										primary={alt}
-										primaryTypographyProps={{ variant: "h5", noWrap: true }}
-										secondary={name}
-										secondaryTypographyProps={{
-											variant: "subtitle2",
-											noWrap: true,
-										}}
-									/>
-									<Grid item container>
-										<Typography align="right" variant="h4" noWrap>
-											{percentage}%
-										</Typography>
-										<Typography variant="caption" color={changes >= 0 ? "success" : "error"}>
-											{changes >= 0 && "+"}
-											{changes}%
-										</Typography>
+									<Grid item container justifyContent="space-between">
+										<Grid item container xs alignItems="center">
+											<Grid item>
+												<ListItemAvatarWrapper>
+													<img alt={alt} src={logo} />
+												</ListItemAvatarWrapper>
+											</Grid>
+											<Grid item>
+												<ListItemText
+													primary={alt}
+													primaryTypographyProps={{ variant: "h5", noWrap: true }}
+													secondary={name}
+													secondaryTypographyProps={{
+														variant: "subtitle2",
+														noWrap: true,
+													}}
+												/>
+											</Grid>
+										</Grid>
+										<Grid item>
+											<Typography align="right" variant="h4" noWrap>
+												{percentage}%
+											</Typography>
+											<Typography
+												variant="caption"
+												color={changePercentage >= 0 ? "success" : "error"}
+											>
+												{changePercentage >= 0 && "+"}
+												{changePercentage}%
+											</Typography>
+										</Grid>
 									</Grid>
 								</ListItem>
 							))}

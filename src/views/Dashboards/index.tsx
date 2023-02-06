@@ -22,6 +22,7 @@ export const Dashboards = () => {
 				data: [55.701, 57.598, 48.607, 46.439, 58.755, 46.978, 58.16],
 			},
 			value: 56475.64,
+			amount: 1.25843,
 			trendingIcon: TrendingUpTwoToneIcon,
 		},
 		{
@@ -36,6 +37,7 @@ export const Dashboards = () => {
 				data: [13, 22.09, 42.0, 71.9, 8, 11, 20],
 			},
 			value: 1960.65,
+			amount: 57830.3,
 			trendingIcon: TrendingDownTwoToneIcon,
 		},
 		{
@@ -50,6 +52,7 @@ export const Dashboards = () => {
 				data: [51.85, 41.77, 22.09, 42.0, 71.9, 51.84, 31.84],
 			},
 			value: 23.69,
+			amount: 34985.85,
 			trendingIcon: TrendingFlatTwoToneIcon,
 		},
 		{
@@ -64,17 +67,18 @@ export const Dashboards = () => {
 				data: [13, 16, 14, 20, 8, 11, 20],
 			},
 			value: 12543.32,
+			amount: 69325.32,
 			trendingIcon: TrendingDownTwoToneIcon,
 		},
 	];
 	return (
 		<Grid item spacing={7} container>
 			<Grid item container>
-				<AccountBalance />
+				<AccountBalance assets={assets} />
 			</Grid>
 			<Grid item container spacing={7}>
 				<Grid item lg={8} xs={12}>
-					<Wallets />
+					<Wallets assets={assets} />
 				</Grid>
 				<Grid item lg={4} xs={12}>
 					<AccountSecurity />

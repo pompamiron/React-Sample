@@ -13,6 +13,7 @@ export interface asset {
 		data: number[];
 	};
 	value: number;
+	amount: number;
 	trendingIcon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
 		muiName: string;
 	};

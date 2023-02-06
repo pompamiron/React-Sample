@@ -97,7 +97,7 @@ export const WatchListColumn: React.FC<WatchListColumnProps> = ({ assets }) => {
 									</ListItemAvatarWrapper>
 								</Grid>
 								<Grid item sx={{ textOverflow: "ellipsis", overflow: "hidden" }}>
-									<Typography variant="h4" sx={{ textOverflow: "ellipsis", overflow: "hidden" }}>
+									<Typography variant="h4" noWrap>
 										{name}
 									</Typography>
 									<Typography variant="subtitle1" noWrap>
