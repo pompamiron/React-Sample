@@ -1,6 +1,6 @@
 import { FunctionComponent, SyntheticEvent } from "react";
 import { DialogTitle, DialogTitleProps, Typography, Stack, useTheme } from "@mui/material";
-import { AppIconButton } from "../../";
+import { AppIconButton } from "src/components/index";
 
 interface Props extends DialogTitleProps {
 	onClose?: (event: SyntheticEvent) => void;

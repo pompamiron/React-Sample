@@ -3,7 +3,7 @@ import { Stack, Divider, Drawer, DrawerProps, FormControlLabel, Switch, Tooltip 
 import { AppIconButton } from "src/components";
 import { useAppStore } from "src/store/AppStore";
 import { LinkToPage } from "src/utils/type";
-import { useEventLogout, useEventSwitchDarkMode, useIsAuthenticated, useOnMobile } from "../../hooks";
+import { useEventLogout, useEventSwitchDarkMode, useIsAuthenticated, useOnMobile } from "src/hooks";
 import SideBarNavList from "./SideBarNavList";
 import { SIDEBAR_WIDTH, TOPBAR_DESKTOP_HEIGHT } from "../config";
 import UserInfo from "src/components/UserInfo";

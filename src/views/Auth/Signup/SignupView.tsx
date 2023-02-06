@@ -11,9 +11,9 @@ import {
 	InputAdornment,
 	LinearProgress,
 } from "@mui/material";
-import { useAppStore } from "../../../store";
-import { AppButton, AppIconButton, AppAlert, AppForm } from "../../../components";
-import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from "../../../utils/form";
+import { useAppStore } from "src/store";
+import { AppButton, AppIconButton, AppAlert, AppForm } from "src/components";
+import { useAppForm, SHARED_CONTROL_PROPS, eventPreventDefault } from "src/utils/form";
 
 const VALIDATE_FORM_SIGNUP = {
 	email: {
@@ -23,7 +23,7 @@ const VALIDATE_FORM_SIGNUP = {
 	phone: {
 		type: "string",
 		format: {
-			pattern: "^$|[- .+()0-9]+", // Note: We have to allow empty in the pattern
+			pattern: "^$|[- .+()0-9]+", // Note: Allow empty in the pattern
 			message: "should contain numbers",
 		},
 		// length: {

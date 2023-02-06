@@ -1,7 +1,7 @@
 import { SyntheticEvent, useCallback, useState } from "react";
 import { Grid, TextField, Card, CardHeader, CardContent } from "@mui/material";
-import { AppButton, AppAlert, AppForm } from "../../../components";
-import { useAppForm, SHARED_CONTROL_PROPS } from "../../../utils/form";
+import { AppButton, AppAlert, AppForm } from "src/components";
+import { useAppForm, SHARED_CONTROL_PROPS } from "src/utils/form";
 
 const VALIDATE_FORM_RECOVERY_PASSWORD = {
 	email: {
